@@ -18,11 +18,16 @@ public class PlayerController : MonoBehaviour
     public float jumpTime;
     public bool isJumping;
 
+    SpriteRenderer myRenderer;
+    public static bool faceRight = true;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        myRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -30,6 +35,16 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+        if (moveInput > 0){
+            //Debug.Log("Move to right");
+            faceRight = true;
+            myRenderer.flipX = true;
+        }
+        else if (moveInput < 0){
+            //Debug.Log("Move to left");
+            faceRight = false;
+            myRenderer.flipX = false;
+        }
     }
 
     void Update(){
