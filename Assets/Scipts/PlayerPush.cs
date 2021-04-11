@@ -8,19 +8,25 @@ public class PlayerPush : MonoBehaviour
     public LayerMask boxMask;
     public Transform boxCheckTransform;
     public float boxCheckRadius;
-    public float dir = 1f;
 
     public GameObject boxCheck;
 
     GameObject box;
     SpriteRenderer myRenderer;
-    public static bool faceRight = true;
+    public bool faceRight;
     public float horizontalInput;
+
+    Vector2 direction = Vector2.right;
 
     // Start is called before the first frame update
     void Start()
     {
-       
+       faceRight = true;
+    }
+
+    void FixedUpdate(){  
+        CheckKeys();  
+        
     }
 
     // Update is called once per frame
@@ -43,22 +49,45 @@ public class PlayerPush : MonoBehaviour
             box.GetComponent<FixedJoint2D> ().enabled = false;
         }
         
-        
     }
     void CheckKeys(){
-        if(Input.GetKeyDown(KeyCode.D)){
+        if(Input.GetKeyDown(KeyCode.D) && faceRight){
             faceRight = true;
-            dir = 1f;
+            Debug.Log("Press D");
+            Vector3 theScale = transform.localScale;
+            theScale.x = 1;
+            transform.localScale = theScale;
+            direction = Vector2.right;
         }
-        else if(Input.GetKeyDown(KeyCode.A)){
+        else if (Input.GetKeyDown(KeyCode.D) && !faceRight){
+            faceRight = true;
+            Debug.Log("Press D");
+            Vector3 theScale = transform.localScale;
+            theScale.x = 1;
+            transform.localScale = theScale;
+            direction = Vector2.right;
+        }
+        else if(Input.GetKeyDown(KeyCode.A) && faceRight){
             faceRight = false;
-            dir = -1f;
+            Debug.Log("Press A");
+            Vector3 theScale = transform.localScale;
+            theScale.x = -1;
+            transform.localScale = theScale;
+            direction = -Vector2.right;
+        }
+        else if(Input.GetKeyDown(KeyCode.A) && !faceRight){
+            faceRight = false;
+            Debug.Log("Press A");
+            Vector3 theScale = transform.localScale;
+            theScale.x = -1;
+            transform.localScale = theScale;
+            direction = -Vector2.right;
         }
     }
 
     void OnDrawGizmos(){
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine (transform.position, transform.position + Vector3.right *distance);
+        Gizmos.DrawLine (transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x *distance);
     }
 
 
