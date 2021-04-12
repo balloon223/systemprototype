@@ -36,11 +36,11 @@ public class PlayerPush : MonoBehaviour
         
         
         Physics2D.queriesStartInColliders = false;
-        RaycastHit2D hit = Physics2D.Raycast (boxCheckTransform.position, Vector2.right * boxCheck.transform.localScale.x, distance, boxMask);
+        RaycastHit2D hit = Physics2D.Raycast (boxCheckTransform.position, direction * boxCheck.transform.localScale.x, distance, boxMask);
 
         if (hit.collider != null && hit.collider.gameObject.tag=="Pushable" && Input.GetKeyDown(KeyCode.E)){
             box = hit.collider.gameObject;
-
+            Debug.Log("collide");
             box.GetComponent<FixedJoint2D> ().enabled = true;
             box.GetComponent<FixedJoint2D> ().connectedBody = this.GetComponent<Rigidbody2D> ();
             Debug.Log("drag");
@@ -51,33 +51,33 @@ public class PlayerPush : MonoBehaviour
         
     }
     void CheckKeys(){
-        if(Input.GetKeyDown(KeyCode.D) && faceRight){
-            faceRight = true;
-            Debug.Log("Press D");
+        if(Input.GetKey(KeyCode.D) && faceRight){
+            //faceRight = true;
+            //Debug.Log("Press D");
             Vector3 theScale = transform.localScale;
             theScale.x = 1;
             transform.localScale = theScale;
             direction = Vector2.right;
         }
-        else if (Input.GetKeyDown(KeyCode.D) && !faceRight){
+        else if (Input.GetKey(KeyCode.D) && !faceRight){
             faceRight = true;
-            Debug.Log("Press D");
+            //Debug.Log("Press D");
             Vector3 theScale = transform.localScale;
             theScale.x = 1;
             transform.localScale = theScale;
             direction = Vector2.right;
         }
-        else if(Input.GetKeyDown(KeyCode.A) && faceRight){
+        else if(Input.GetKey(KeyCode.A) && faceRight){
             faceRight = false;
-            Debug.Log("Press A");
+            //Debug.Log("Press A");
             Vector3 theScale = transform.localScale;
             theScale.x = -1;
             transform.localScale = theScale;
             direction = -Vector2.right;
         }
-        else if(Input.GetKeyDown(KeyCode.A) && !faceRight){
-            faceRight = false;
-            Debug.Log("Press A");
+        else if(Input.GetKey(KeyCode.A) && !faceRight){
+            //faceRight = false;
+            //Debug.Log("Press A");
             Vector3 theScale = transform.localScale;
             theScale.x = -1;
             transform.localScale = theScale;
