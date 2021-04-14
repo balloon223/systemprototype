@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 464162829}
   m_Layer: 0
   m_Name: Square (5)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 647277882}
   m_Layer: 8
   m_Name: Square (5)
-  m_TagString: land
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -488,7 +488,7 @@ GameObject:
   - component: {fileID: 784889500}
   m_Layer: 8
   m_Name: Square (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -765,16 +765,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d417292790dfe4eb21f70a7b6cdef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  jumpForce: 7
-  isGrounded: 0
-  feetPos: {fileID: 417771796}
-  checkRadius: 0.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  jumpTime: 0.3
-  isJumping: 0
+  footWidth: 1
+  footDepth: 0.75
+  speed: 0.75
+  speedCap: 4
+  floorDrag: 0.9
+  jumpPower: 5
+  jumpLength: 0
+  isGrounded: 0
+  feetPos: {fileID: 0}
+  checkRadius: 0.1
 --- !u!50 &939280987
 Rigidbody2D:
   serializedVersion: 4
@@ -794,7 +797,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &939280988
 BoxCollider2D:
@@ -880,7 +883,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939280985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.23, y: -0.9, z: -0.56933594}
+  m_LocalPosition: {x: -3.22, y: -0.71, z: -0.56933594}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 417771796}
@@ -925,7 +928,7 @@ GameObject:
   - component: {fileID: 970234495}
   m_Layer: 8
   m_Name: Square (3)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1171,7 +1174,7 @@ GameObject:
   - component: {fileID: 1779316771}
   m_Layer: 8
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1280,7 +1283,7 @@ GameObject:
   - component: {fileID: 1813376834}
   m_Layer: 8
   m_Name: New Sprite
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1409,7 +1412,7 @@ GameObject:
   - component: {fileID: 1915808264}
   m_Layer: 8
   m_Name: Square (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1517,7 +1520,7 @@ GameObject:
   - component: {fileID: 2061784805}
   m_Layer: 8
   m_Name: Square (4)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
