@@ -763,7 +763,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 6
+  m_Mass: 4
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -906,7 +906,7 @@ MonoBehaviour:
   speedCap: 4
   floorDrag: 0.9
   jumpPower: 0.325
-  jumpLength: 20
+  jumpLength: 21
   mantleDetLength: 0.5
   mantleX: 0.75
   mantleY: -0.1
@@ -927,7 +927,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.25
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1020,7 +1020,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939280985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6, y: -0.66, z: -0.56933594}
+  m_LocalPosition: {x: -2.04, y: 0.01, z: -0.56933594}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 417771796}
