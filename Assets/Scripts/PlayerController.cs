@@ -12,11 +12,19 @@ public class PlayerController : MonoBehaviour
     public float footDepth; //how far down is our "foot" ray?
 
     public float speed; //speed multiplier
+    public float airSpeedMul; //airspeed multiplier so we move slower while in midair — less air control
     public float speedCap; //max speed
     public float floorDrag; //how fast we should stop moving when touching the floor
 
     public float jumpPower; //how much velocity we should apply to our player PER JUMP FRAME
-    public float jumpLength; //max jump length in frames
+    public int jumpLength; //max jump length in frames
+    private int jumpRemaining;
+
+    public float mantleDetLength; //length of our mantle raycast (not too big)
+    public float mantleX; //location of our mantle raycast's start (should be near our feet, looking down)
+    public float mantleY;
+    public bool mantling; //if we're mantling over something
+    public float mantlePower; //how much juice mantling should have
 
     private float moveInput; //no idea yet
 
@@ -38,12 +46,15 @@ public class PlayerController : MonoBehaviour
     {
         groundFinder();
         leftRightMotionHandler();
+
     }
 
     void Update()
     {
+        mantler();
         jumpHandler();
         InputFinder();
+
     }
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -68,23 +79,58 @@ public class PlayerController : MonoBehaviour
         if(isGrounded)
         {
             myBody.velocity += new Vector2(moveInput * speed, 0);
-        }
+        } else if(!isGrounded) //if we're in midair, don't remove player agency totally!!
+        {
+            myBody.velocity += new Vector2(moveInput * speed * airSpeedMul, 0 );
+        }  
+
         if(Mathf.Abs(myBody.velocity.x) > speedCap)
         {
             myBody.velocity = new Vector2(moveInput * speedCap, myBody.velocity.y);
         }
-        if(moveInput == 0 && isGrounded)
+        if(moveInput == 0 && isGrounded) //slow us down with a static drag
         {
             myBody.velocity = new Vector2(myBody.velocity.x * floorDrag, myBody.velocity.y);
         }
     }
 
+    void mantler()
+    {
+        Physics2D.queriesStartInColliders = false;
+        Vector2 mantleOffset = new Vector2(transform.position.x + (mantleX * transform.localScale.x), transform.position.y + mantleY);  //this tells us what offset we use
+        RaycastHit2D mantleDet = Physics2D.Raycast(mantleOffset, new Vector2(0, -1), mantleDetLength, whatIsGround);
+        if(mantleDet.collider != null && Input.GetKey(KeyCode.Space))
+        {
+            mantling = true;
+        } else{
+            mantling = false;
+        }
+        if(mantling)
+        {
+            myBody.velocity = new Vector2(0, mantlePower);
+        }
+
+        Debug.DrawRay(mantleOffset, new Vector2(0, -mantleDetLength), Color.red);
+    }
+
     void jumpHandler()
     {
-        if(isGrounded == true && Input.GetKeyDown(KeyCode.Space))//fix this so it's more dynamic
+        if(isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
             isGrounded = false;
-            myBody.velocity = new Vector2(myBody.velocity.x, jumpPower); //temp
+            jumpRemaining = jumpLength;
+            myBody.velocity += new Vector2(0, jumpPower);
+        }
+        if(jumpRemaining != 0)
+        {
+            if(Input.GetKey(KeyCode.Space) && jumpRemaining > 0)
+            {
+                jumpRemaining--;
+                myBody.velocity += new Vector2(0, jumpPower);
+            } else if(!Input.GetKey(KeyCode.Space))
+            {
+                jumpRemaining = 0;
+            }
         }
     }
 
