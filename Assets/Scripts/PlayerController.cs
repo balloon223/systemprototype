@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public static bool faceRight = true;
 
 
+
     void Start()
     {
         myBody = GetComponent<Rigidbody2D>();
@@ -54,7 +55,6 @@ public class PlayerController : MonoBehaviour
         mantler();
         jumpHandler();
         InputFinder();
-
     }
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -138,4 +138,6 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = Input.GetAxisRaw("Horizontal"); //essentially positive or negative, pretty clever
     }
+
+
 }

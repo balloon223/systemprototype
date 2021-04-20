@@ -51,7 +51,7 @@ public class PlayerPush : MonoBehaviour
         
     }
     void CheckKeys(){
-        if(Input.GetKey(KeyCode.D) && faceRight){
+        if(Input.GetKey(KeyCode.D) || Input.GetKey("right") && faceRight){
             //faceRight = true;
             //Debug.Log("Press D");
             Vector3 theScale = transform.localScale;
@@ -59,7 +59,7 @@ public class PlayerPush : MonoBehaviour
             transform.localScale = theScale;
             direction = Vector2.right;
         }
-        else if (Input.GetKey(KeyCode.D) && !faceRight){
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey("right") && !faceRight){
             faceRight = true;
             //Debug.Log("Press D");
             Vector3 theScale = transform.localScale;
@@ -67,7 +67,7 @@ public class PlayerPush : MonoBehaviour
             transform.localScale = theScale;
             direction = Vector2.right;
         }
-        else if(Input.GetKey(KeyCode.A) && faceRight){
+        else if(Input.GetKey(KeyCode.A) || Input.GetKey("left") && faceRight){
             faceRight = false;
             //Debug.Log("Press A");
             Vector3 theScale = transform.localScale;
@@ -75,7 +75,7 @@ public class PlayerPush : MonoBehaviour
             transform.localScale = theScale;
             direction = -Vector2.right;
         }
-        else if(Input.GetKey(KeyCode.A) && !faceRight){
+        else if(Input.GetKey(KeyCode.A) || Input.GetKey("left") && !faceRight){
             //faceRight = false;
             //Debug.Log("Press A");
             Vector3 theScale = transform.localScale;
