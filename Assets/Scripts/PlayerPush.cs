@@ -11,7 +11,8 @@ public class PlayerPush : MonoBehaviour
 
     public GameObject boxCheck;
 
-    GameObject box;
+    private PlayerController control;
+    GameObject dragging;
     SpriteRenderer myRenderer;
     public bool faceRight;
     public float horizontalInput;
@@ -21,7 +22,8 @@ public class PlayerPush : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       faceRight = true;
+        control = gameObject.GetComponent<PlayerController>();
+        faceRight = true;
     }
 
     void FixedUpdate(){  
@@ -32,26 +34,43 @@ public class PlayerPush : MonoBehaviour
     void Update()
     {
         CheckKeys();  
-
         horizontalInput = Input.GetAxis("Horizontal");
+        PushPushable();
         
-        
+
+    }
+
+    void OnDrawGizmos(){
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine (transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x *distance);
+    }
+//----------------------------------------------------------------------------------------------------------------------
+
+    void PushPushable()
+    {
         Physics2D.queriesStartInColliders = false;
         RaycastHit2D hit = Physics2D.Raycast (boxCheckTransform.position, direction * boxCheck.transform.localScale.x, distance, boxMask);
 
-        if (hit.collider != null && hit.collider.gameObject.tag=="Pushable" && Input.GetKeyDown(KeyCode.E)){
-            box = hit.collider.gameObject;
+        if (hit.collider != null && hit.collider.gameObject.tag=="Pushable")
+        {
+            dragging = hit.collider.gameObject;
             Debug.Log("collide");
-            box.GetComponent<FixedJoint2D> ().enabled = true;
-            box.GetComponent<FixedJoint2D> ().connectedBody = this.GetComponent<Rigidbody2D> ();
-            Debug.Log("drag");
+            if(Input.GetKey(KeyCode.E) && control.isGrounded)   //for now
+            {
+                Debug.Log("drag");
+                dragging.GetComponent<FixedJoint2D>().enabled = true;
+                dragging.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D> ();
+            }
         }
-        else if (Input.GetKeyUp (KeyCode.E)){
-            box.GetComponent<FixedJoint2D> ().enabled = false;
+        if (!Input.GetKey(KeyCode.E) && dragging.GetComponent<FixedJoint2D>().enabled)   //catch-all for terror joints
+        {
+            dragging.GetComponent<FixedJoint2D>().enabled = false;
         }
-        
+
     }
-    void CheckKeys(){
+
+    void CheckKeys()
+    {
         if(Input.GetKey(KeyCode.D) || Input.GetKey("right")){
             faceRight = true;
             transform.localScale = new Vector2(1, transform.localScale.y);
@@ -64,10 +83,7 @@ public class PlayerPush : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos(){
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine (transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x *distance);
-    }
+
 
 
 }
