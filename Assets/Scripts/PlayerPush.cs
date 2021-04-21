@@ -25,13 +25,14 @@ public class PlayerPush : MonoBehaviour
     }
 
     void FixedUpdate(){  
-        CheckKeys();  
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckKeys();  
+
         horizontalInput = Input.GetAxis("Horizontal");
         
         
@@ -51,37 +52,15 @@ public class PlayerPush : MonoBehaviour
         
     }
     void CheckKeys(){
-        if(Input.GetKey(KeyCode.D) || Input.GetKey("right") && faceRight){
-            //faceRight = true;
-            //Debug.Log("Press D");
-            Vector3 theScale = transform.localScale;
-            theScale.x = 1;
-            transform.localScale = theScale;
-            direction = Vector2.right;
-        }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey("right") && !faceRight){
+        if(Input.GetKey(KeyCode.D) || Input.GetKey("right")){
             faceRight = true;
-            //Debug.Log("Press D");
-            Vector3 theScale = transform.localScale;
-            theScale.x = 1;
-            transform.localScale = theScale;
+            transform.localScale = new Vector2(1, transform.localScale.y);
             direction = Vector2.right;
         }
-        else if(Input.GetKey(KeyCode.A) || Input.GetKey("left") && faceRight){
+        else if(Input.GetKey(KeyCode.A) || Input.GetKey("left")){
             faceRight = false;
-            //Debug.Log("Press A");
-            Vector3 theScale = transform.localScale;
-            theScale.x = -1;
-            transform.localScale = theScale;
-            direction = -Vector2.right;
-        }
-        else if(Input.GetKey(KeyCode.A) || Input.GetKey("left") && !faceRight){
-            //faceRight = false;
-            //Debug.Log("Press A");
-            Vector3 theScale = transform.localScale;
-            theScale.x = -1;
-            transform.localScale = theScale;
-            direction = -Vector2.right;
+            transform.localScale = new Vector2(-1, transform.localScale.y);
+            direction = Vector2.left;
         }
     }
 

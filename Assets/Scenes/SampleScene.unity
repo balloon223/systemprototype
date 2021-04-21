@@ -901,17 +901,17 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  footWidth: 1.34
-  footDepth: 1.49
+  footWidth: 0.48
+  footDepth: 0.95
   speed: 0.45
   airSpeedMul: 0.15
   speedCap: 4
   floorDrag: 0.9
-  jumpPower: 0.325
-  jumpLength: 21
-  mantleDetLength: 0.5
-  mantleX: 0.75
-  mantleY: -0.1
+  jumpPower: 0.625
+  jumpLength: 10
+  mantleDetLength: 0.58
+  mantleX: 0.29
+  mantleY: -0.22
   mantling: 0
   mantlePower: 4
   isGrounded: 0
@@ -951,7 +951,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.042312324, y: -0.2068603}
+  m_Offset: {x: 0, y: -0.2068603}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -962,7 +962,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.42126667, y: 2.499275}
+  m_Size: {x: 0.45, y: 1.35}
   m_EdgeRadius: 0
 --- !u!114 &939280989
 MonoBehaviour:
