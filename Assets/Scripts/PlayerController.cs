@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private Collider2D myCollider;
     public LayerMask whatIsGround;
     
+    public bool grabbing;
+
     public float footWidth; //how wide is our "foot" ray?
     public float footDepth; //how far down is our "foot" ray?
 
@@ -52,6 +54,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(!grabbing){
+            rotationJustifier();
+        }
         mantler();
         jumpHandler();
         InputFinder();
@@ -79,10 +84,13 @@ public class PlayerController : MonoBehaviour
         if(isGrounded)
         {
             myBody.velocity += new Vector2(moveInput * speed, 0);
-        } else if(!isGrounded) //if we're in midair, don't remove player agency totally!!
+        } else if(!isGrounded && !grabbing) //if we're in midair, don't remove player agency totally!!
         {
             myBody.velocity += new Vector2(moveInput * speed * airSpeedMul, 0 );
-        }  
+        } else if(!isGrounded && grabbing)
+        {
+            myBody.velocity += new Vector2(moveInput * speed * airSpeedMul*2, 0 );
+        }
 
         if(Mathf.Abs(myBody.velocity.x) > speedCap)
         {
@@ -91,6 +99,16 @@ public class PlayerController : MonoBehaviour
         if(moveInput == 0 && isGrounded) //slow us down with a static drag
         {
             myBody.velocity = new Vector2(myBody.velocity.x * floorDrag, myBody.velocity.y);
+        }
+    }
+
+    void rotationJustifier()
+    {
+        if(Mathf.Abs(gameObject.GetComponent<Rigidbody2D>().rotation) > 1)
+        {
+            gameObject.GetComponent<Rigidbody2D>().rotation = Mathf.LerpAngle(gameObject.GetComponent<Rigidbody2D>().rotation, 0, 0.25f);
+        } else{
+            gameObject.GetComponent<Rigidbody2D>().rotation = 0;
         }
     }
 
