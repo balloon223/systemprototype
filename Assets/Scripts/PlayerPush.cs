@@ -73,7 +73,7 @@ public class PlayerPush : MonoBehaviour
         Physics2D.queriesStartInColliders = false;
         RaycastHit2D hit = Physics2D.Raycast (boxCheckTransform.position, direction * boxCheck.transform.localScale.x, distance, boxMask);
 
-        if (hit.collider != null && hit.collider.gameObject.tag=="Rope" && !grabbedObject.GetComponent<FixedJoint2D>().enabled)
+        if (hit.collider != null && hit.collider.gameObject.tag=="Pushable" && !grabbedObject.GetComponent<FixedJoint2D>().enabled)
         {
             dragging = hit.collider.gameObject;
             Debug.Log("collide");
