@@ -33,16 +33,19 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     public Transform feetPos;
     public float checkRadius;
+    public bool isWalking;
+
 
     SpriteRenderer myRenderer;
     public static bool faceRight = true;
 
-
+    AudioSource walkAudio;
 
     void Start()
     {
         myBody = GetComponent<Rigidbody2D>();
         myCollider = GetComponent<Collider2D>();
+        walkAudio = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -54,6 +57,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(isWalking){
+            if(!walkAudio.isPlaying){walkAudio.Play();}
+        }
+        else{
+            walkAudio.Stop();
+        }
+
         if(!grabbing){
             rotationJustifier();
         }
@@ -84,12 +94,17 @@ public class PlayerController : MonoBehaviour
         if(isGrounded)
         {
             myBody.velocity += new Vector2(moveInput * speed, 0);
+            if(moveInput != 0){
+            isWalking = true;}
+            else{isWalking = false;}
         } else if(!isGrounded && !grabbing) //if we're in midair, don't remove player agency totally!!
         {
             myBody.velocity += new Vector2(moveInput * speed * airSpeedMul, 0 );
+            isWalking = false;
         } else if(!isGrounded && grabbing)
         {
             myBody.velocity += new Vector2(moveInput * speed * airSpeedMul*2, 0 );
+            isWalking = true;
         }
 
         if(Mathf.Abs(myBody.velocity.x) > speedCap)
