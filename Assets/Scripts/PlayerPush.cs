@@ -13,7 +13,7 @@ public class PlayerPush : MonoBehaviour
 
     private PlayerController control;
     GameObject dragging;
-    GameObject grabbedObject;
+    public GameObject grabbedObject;
     SpriteRenderer myRenderer;
     public bool faceRight;
     public float horizontalInput;

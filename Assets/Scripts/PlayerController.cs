@@ -4,7 +4,7 @@ using UnityEngine;
 //testing
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D myBody;
+    public Rigidbody2D myBody;
     private Collider2D myCollider;
     public LayerMask whatIsGround;
     

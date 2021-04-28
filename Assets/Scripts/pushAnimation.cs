@@ -7,18 +7,20 @@ public class pushAnimation : MonoBehaviour
     public Animator myAnim;
     public bool detectPushableObj;
     public bool collideWithObject;
-    public GameObject box;
+
+    private PlayerController control;
 
     // Start is called before the first frame update
     void Start()
     {
+        control = gameObject.GetComponent<PlayerController>();
         collideWithObject = false;
     }
 
     // Update is called once per frame
     void Update()
     {   
-        if (box.GetComponent<FixedJoint2D>().enabled == true){ //pulling
+        if (control.grabbing){ //pulling
             myAnim.SetBool("pull", true);
             myAnim.SetBool("push", false);
             Debug.Log("pull");
