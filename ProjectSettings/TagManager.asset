@@ -8,6 +8,7 @@ TagManager:
   - land
   - Ground
   - Rope
+  - GM
   layers:
   - Default
   - TransparentFX
