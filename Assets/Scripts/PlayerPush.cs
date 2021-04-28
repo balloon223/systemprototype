@@ -38,7 +38,7 @@ public class PlayerPush : MonoBehaviour
         CheckKeys();  
         horizontalInput = Input.GetAxis("Horizontal");
         PushPushable();
-        GrabGrabbable();
+        //GrabGrabbable();
         ReleaseGrabbed();
     }
 
@@ -68,15 +68,15 @@ public class PlayerPush : MonoBehaviour
         }
     }
 
-    void GrabGrabbable()
+    void GrabGrabbable()    //handle rope waggle too
     {
         Physics2D.queriesStartInColliders = false;
-        RaycastHit2D hit = Physics2D.Raycast (boxCheckTransform.position, direction * boxCheck.transform.localScale.x, distance, boxMask);
+        RaycastHit2D hit = Physics2D.Raycast (boxCheckTransform.position, direction * boxCheck.transform.localScale.x, distance);
 
-        if (hit.collider != null && hit.collider.gameObject.tag=="Pushable" && !grabbedObject.GetComponent<FixedJoint2D>().enabled)
+        if (hit.collider != null && hit.collider.gameObject.tag=="Rope" && !grabbedObject.GetComponent<FixedJoint2D>().enabled)
         {
             dragging = hit.collider.gameObject;
-            //Debug.Log("collide");
+            Debug.Log("collide");
             if(Input.GetKey(KeyCode.E))    //placeholder we grab with e
             {
                 grabbedObject = dragging;

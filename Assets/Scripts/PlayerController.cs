@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
 
     void jumpHandler()
     {
-        if(isGrounded == true && Input.GetKeyDown("up"))
+        if(isGrounded == true && Input.GetKeyDown("up") || isGrounded == true && Input.GetKeyDown(KeyCode.W))
         {
             isGrounded = false;
             jumpRemaining = jumpLength;
@@ -156,11 +156,11 @@ public class PlayerController : MonoBehaviour
         }
         if(jumpRemaining != 0)
         {
-            if(Input.GetKey("up") && jumpRemaining > 0)
+            if(Input.GetKey("up") && jumpRemaining > 0 || Input.GetKey(KeyCode.W) && jumpRemaining > 0)
             {
                 jumpRemaining--;
                 myBody.velocity += new Vector2(0, jumpPower);
-            } else if(!Input.GetKey("up"))
+            } else if(!Input.GetKey("up") || Input.GetKey(KeyCode.W))
             {
                 jumpRemaining = 0;
             }
