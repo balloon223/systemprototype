@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D floorDet = Physics2D.Raycast(Xoffset, new Vector2(-1, 0), footWidth, whatIsGround);
         if(floorDet.collider != null)
         {
-            Debug.Log(floorDet.collider.tag);
+            //Debug.Log(floorDet.collider.tag);
             isGrounded = true;
         } else{
             isGrounded = false;
