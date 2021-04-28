@@ -991,7 +991,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 709588939}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.061, y: -0.1, z: 0}
+  m_LocalPosition: {x: -0.053, y: -0.199, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 939280990}
@@ -1286,7 +1286,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0012489557, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1297,7 +1297,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.98251474, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &816466300
 SpriteRenderer:
@@ -1356,7 +1356,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816466296}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 67.404, y: -16.869999, z: 0}
   m_LocalScale: {x: 3.2292862, y: 2.35, z: 1}
   m_Children:
@@ -1377,7 +1377,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.001201719, y: 0}
+  m_Offset: {x: -0.0032831132, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1388,7 +1388,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2157218, y: 1}
+  m_Size: {x: 1.1784894, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &912545376
 GameObject:
@@ -1697,7 +1697,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.034812927, y: -0.25293612}
+  m_Offset: {x: -0.03080368, y: -0.25293612}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1708,7 +1708,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.57068634, y: 1.4421515}
+  m_Size: {x: 0.62355804, y: 1.4421515}
   m_EdgeRadius: 0
 --- !u!114 &939280989
 MonoBehaviour:
@@ -1753,7 +1753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced5d401a22244975a47372e6bd0fb79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 1.07
+  distance: 0.4
   boxMask:
     serializedVersion: 2
     m_Bits: 311
@@ -1910,6 +1910,7 @@ MonoBehaviour:
   myAnim: {fileID: 939280992}
   detectPushableObj: 0
   collideWithObject: 0
+  box: {fileID: 816466296}
 --- !u!1 &1041982044
 GameObject:
   m_ObjectHideFlags: 0

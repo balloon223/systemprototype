@@ -7,6 +7,7 @@ public class pushAnimation : MonoBehaviour
     public Animator myAnim;
     public bool detectPushableObj;
     public bool collideWithObject;
+    public GameObject box;
 
     // Start is called before the first frame update
     void Start()
@@ -16,41 +17,35 @@ public class pushAnimation : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)){
-        //    if(collideWithObject = true){
- //               myAnim.SetBool("push", true);
-        //    }
-        //    else{
-        //        myAnim.SetBool("push", false);
-        //    }
+    {   
+        if (box.GetComponent<FixedJoint2D>().enabled == true){ //pulling
+            myAnim.SetBool("pull", true);
+            myAnim.SetBool("push", false);
+            Debug.Log("pull");
         }
-        else if(Input.GetKey("left") || Input.GetKey("right")){
-        //    if (collideWithObject = true){
-    //            myAnim.SetBool("push", true);
-        //    }
-        //    else{
-        //        myAnim.SetBool("push", false);
-        //    }
-        }
-        
-
-        if (collideWithObject){
-            if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)){
-                myAnim.SetBool("push", true);
-            }
-            else if(Input.GetKey("left") || Input.GetKey("right")){
-                myAnim.SetBool("push", true);
+        else {
+            myAnim.SetBool("pull", false);
+            if (collideWithObject){ 
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)){ //pushing
+                    myAnim.SetBool("push", true);
+                    Debug.Log("Pushing");
+                }
+                else if (Input.GetKey("right") || Input.GetKey("left")){ //pushing
+                    myAnim.SetBool("push", true);
+                    Debug.Log("Pushing");
+                }
+                else { //waiting to pull/push
+                    myAnim.SetBool("pull", false);
+                    myAnim.SetBool("push", false);
+                }
             }
             else {
                 myAnim.SetBool("push", false);
             }
         }
-        else {
-            myAnim.SetBool("push", false);
-        }
 
     }
+
 
 
     private void OnTriggerEnter2D(Collider2D other){
