@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 //testing
 public class PlayerController : MonoBehaviour
 {
@@ -172,5 +174,11 @@ public class PlayerController : MonoBehaviour
         moveInput = Input.GetAxisRaw("Horizontal"); //essentially positive or negative, pretty clever
     }
 
+
+    void OnTriggerEnter2D(Collider2D trig){
+        if (trig.gameObject.tag == "Trap"){
+        SceneManager.LoadScene(0);
+        }
+    }
 
 }
