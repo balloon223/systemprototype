@@ -23,18 +23,18 @@ public class pushAnimation : MonoBehaviour
         if (control.grabbing){ //pulling
             myAnim.SetBool("pull", true);
             myAnim.SetBool("push", false);
-            Debug.Log("pull");
+            //Debug.Log("pull");
         }
         else {
             myAnim.SetBool("pull", false);
             if (collideWithObject){ 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)){ //pushing
                     myAnim.SetBool("push", true);
-                    Debug.Log("Pushing");
+                    //Debug.Log("Pushing");
                 }
                 else if (Input.GetKey("right") || Input.GetKey("left")){ //pushing
                     myAnim.SetBool("push", true);
-                    Debug.Log("Pushing");
+                    //Debug.Log("Pushing");
                 }
                 else { //waiting to pull/push
                     myAnim.SetBool("pull", false);
