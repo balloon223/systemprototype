@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public float checkRadius;
     public bool isWalking;
 
+    public float eulers;
 
     SpriteRenderer myRenderer;
     public static bool faceRight = true;
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        eulers = gameObject.transform.rotation.eulerAngles.z;
         groundFinder();
         leftRightMotionHandler();
 
@@ -59,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
         if(isWalking){
             if(!walkAudio.isPlaying){walkAudio.Play();}
         }
@@ -66,9 +69,9 @@ public class PlayerController : MonoBehaviour
             walkAudio.Stop();
         }
 
-        if(!grabbing){
-            rotationJustifier();
-        }
+        
+        rotationJustifier();
+
         mantler();
         jumpHandler();
         InputFinder();
@@ -104,8 +107,14 @@ public class PlayerController : MonoBehaviour
             myBody.velocity += new Vector2(moveInput * speed * airSpeedMul, 0 );
             isWalking = false;
         } else if(!isGrounded && grabbing)
-        {
-            myBody.velocity += new Vector2(moveInput * speed * airSpeedMul*2, 0 );
+        {   //need to make this change based on what direction we're actually facing
+
+            myBody.velocity += new Vector2(Mathf.Cos(Mathf.Deg2Rad * eulers) * moveInput * speed * airSpeedMul*3, 
+                Mathf.Sin(Mathf.Deg2Rad * eulers) * moveInput * speed * airSpeedMul*3);
+            //myBody.velocity += new Vector2(moveInput * speed * airSpeedMul*3, 0 );
+
+            Debug.DrawRay(gameObject.transform.position, new Vector2(Mathf.Cos(Mathf.Deg2Rad * eulers), Mathf.Sin(Mathf.Deg2Rad * eulers)), Color.blue);
+
             isWalking = true;
         }
 
@@ -121,11 +130,19 @@ public class PlayerController : MonoBehaviour
 
     void rotationJustifier()
     {
-        if(Mathf.Abs(gameObject.GetComponent<Rigidbody2D>().rotation) > 1)
+        if(grabbing && Mathf.Abs(myBody.rotation) > 60)
         {
-            gameObject.GetComponent<Rigidbody2D>().rotation = Mathf.LerpAngle(gameObject.GetComponent<Rigidbody2D>().rotation, 0, 0.25f);
-        } else{
-            gameObject.GetComponent<Rigidbody2D>().rotation = 0;
+            if(myBody.rotation > 60){
+                myBody.rotation = Mathf.LerpAngle(gameObject.GetComponent<Rigidbody2D>().rotation, 60, 0.005f);
+            }
+            if(myBody.rotation < -60){
+                myBody.rotation = Mathf.LerpAngle(gameObject.GetComponent<Rigidbody2D>().rotation, -60, 0.005f);
+            }
+        } else if(!grabbing && Mathf.Abs(myBody.rotation) > 1)
+        {
+            myBody.rotation = Mathf.LerpAngle(gameObject.GetComponent<Rigidbody2D>().rotation, 0, 0.25f);
+        } else if(!grabbing){
+            myBody.rotation = 0;
         }
     }
 
@@ -176,8 +193,8 @@ public class PlayerController : MonoBehaviour
 
 
     void OnTriggerEnter2D(Collider2D trig){
-        if (trig.gameObject.tag == "Trap"){
-        SceneManager.LoadScene(0);
+        if(trig.gameObject.tag == "Trap"){
+            SceneManager.LoadScene(0);
         }
     }
 

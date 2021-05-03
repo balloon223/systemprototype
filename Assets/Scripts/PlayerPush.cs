@@ -38,7 +38,7 @@ public class PlayerPush : MonoBehaviour
         CheckKeys();  
         horizontalInput = Input.GetAxis("Horizontal");
         PushPushable();
-        //GrabGrabbable();
+        GrabGrabbable();
         ReleaseGrabbed();
     }
 
@@ -83,8 +83,28 @@ public class PlayerPush : MonoBehaviour
                 //Debug.Log("grab");
                 grabbedObject.GetComponent<FixedJoint2D>().enabled = true;
                 grabbedObject.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D> ();
-                gameObject.GetComponent<Rigidbody2D>().freezeRotation = false;
+                //gameObject.GetComponent<Rigidbody2D>().freezeRotation = false;
                 control.grabbing = true;
+            }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Rope")
+        {
+            if(!grabbedObject.GetComponent<FixedJoint2D>().enabled)
+            {
+                dragging = other.gameObject;
+                Debug.Log("touching rope");
+                if(Input.GetKey(KeyCode.E))
+                {
+                    grabbedObject = dragging;
+                    grabbedObject.GetComponent<FixedJoint2D>().enabled = true;
+                    grabbedObject.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D> ();
+                    gameObject.GetComponent<Rigidbody2D>().freezeRotation = false;
+                    control.grabbing = true;
+                }
             }
         }
     }
