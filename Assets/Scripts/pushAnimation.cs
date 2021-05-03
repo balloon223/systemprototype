@@ -20,7 +20,7 @@ public class pushAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        if (control.grabbing){ //pulling
+        if (control.grabbing && control.isGrounded){ //pulling
             myAnim.SetBool("pull", true);
             myAnim.SetBool("push", false);
             //Debug.Log("pull");
