@@ -87,6 +87,21 @@ public class PlayerPush : MonoBehaviour
                 control.grabbing = true;
             }
         }
+
+        if (hit.collider != null && hit.collider.gameObject.tag=="Pushable" && !grabbedObject.GetComponent<FixedJoint2D>().enabled)
+        {
+            dragging = hit.collider.gameObject;
+            Debug.Log("collide");
+            if(Input.GetKey(KeyCode.E))    //placeholder we grab with e
+            {
+                grabbedObject = dragging;
+                //Debug.Log("grab");
+                grabbedObject.GetComponent<FixedJoint2D>().enabled = true;
+                grabbedObject.GetComponent<FixedJoint2D>().connectedBody = this.GetComponent<Rigidbody2D> ();
+                //gameObject.GetComponent<Rigidbody2D>().freezeRotation = false;
+                control.grabbing = true;
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
