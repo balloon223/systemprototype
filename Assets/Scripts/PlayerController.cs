@@ -7,37 +7,45 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D myBody;
-    private Collider2D myCollider;
-    public LayerMask whatIsGround;
+    Collider2D myCollider;
+    private LayerMask whatIsGround;
     
+    [Header("Floor Detection")]
+    [SerializeField]
+    float footWidth;
+    [SerializeField]
+    float footDepth;
+
+    [Space]
+    [Header("Movement Variables")]
+    [SerializeField]
+    float speed;
+    [SerializeField]
+    float speedCap, airSpeedMul, floorDrag;
+
+    [Space]
+    [Header("Jump Variables")]
+    [SerializeField]
+    float jumpPower; //how much velocity we should apply to our player PER JUMP FRAME
+    [SerializeField]
+    int jumpLength; //max jump length in frames
+    int jumpRemaining;  //we don't need to know this
+
+    [Space]
+    [Header("Mantle Variables")]
+    [SerializeField]
+    float mantleDetLength; //length of our mantle raycast (not too big)
+    [SerializeField]
+    float mantlePower, mantleX, mantleY;
+    bool mantling; //if we're mantling over something (housekeeping variable)
+
+    float moveInput; //no idea yet
+    [Space]
+    [Header("Public Variables")]
+    public bool isGrounded;
     public bool grabbing;
 
-    public float footWidth; //how wide is our "foot" ray?
-    public float footDepth; //how far down is our "foot" ray?
-
-    public float speed; //speed multiplier
-    public float airSpeedMul; //airspeed multiplier so we move slower while in midair — less air control
-    public float speedCap; //max speed
-    public float floorDrag; //how fast we should stop moving when touching the floor
-
-    public float jumpPower; //how much velocity we should apply to our player PER JUMP FRAME
-    public int jumpLength; //max jump length in frames
-    private int jumpRemaining;
-
-    public float mantleDetLength; //length of our mantle raycast (not too big)
-    public float mantleX; //location of our mantle raycast's start (should be near our feet, looking down)
-    public float mantleY;
-    public bool mantling; //if we're mantling over something
-    public float mantlePower; //how much juice mantling should have
-
-    private float moveInput; //no idea yet
-
-    public bool isGrounded;
-    public Transform feetPos;
-    public float checkRadius;
-    public bool isWalking;
-
-    public float eulers;
+    bool isWalking;
 
     SpriteRenderer myRenderer;
     public static bool faceRight = true;
@@ -49,14 +57,13 @@ public class PlayerController : MonoBehaviour
         myBody = GetComponent<Rigidbody2D>();
         myCollider = GetComponent<Collider2D>();
         walkAudio = GetComponent<AudioSource>();
+        whatIsGround = LayerMask.GetMask("Ground");
     }
 
     void FixedUpdate()
     {
-        eulers = gameObject.transform.rotation.eulerAngles.z;
         groundFinder();
         leftRightMotionHandler();
-
     }
 
     void Update()
@@ -108,12 +115,11 @@ public class PlayerController : MonoBehaviour
             isWalking = false;
         } else if(!isGrounded && grabbing)
         {   //need to make this change based on what direction we're actually facing
+            float _cRot = Mathf.Deg2Rad * myBody.rotation;  //current rotation in radian
+            float _sSpeed = moveInput * speed * airSpeedMul*3; //swingspeed
+            myBody.velocity += new Vector2(Mathf.Cos(_cRot) * _sSpeed, Mathf.Sin(_cRot) * _sSpeed);
 
-            myBody.velocity += new Vector2(Mathf.Cos(Mathf.Deg2Rad * eulers) * moveInput * speed * airSpeedMul*3, 
-                Mathf.Sin(Mathf.Deg2Rad * eulers) * moveInput * speed * airSpeedMul*3);
-            //myBody.velocity += new Vector2(moveInput * speed * airSpeedMul*3, 0 );
-
-            Debug.DrawRay(gameObject.transform.position, new Vector2(Mathf.Cos(Mathf.Deg2Rad * eulers), Mathf.Sin(Mathf.Deg2Rad * eulers)), Color.blue);
+            Debug.DrawRay(gameObject.transform.position, new Vector2(Mathf.Cos(_cRot), Mathf.Sin(_cRot)), Color.blue);
 
             isWalking = true;
         }
