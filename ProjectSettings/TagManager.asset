@@ -10,6 +10,7 @@ TagManager:
   - Rope
   - GM
   - Trap
+  - slope
   layers:
   - Default
   - TransparentFX

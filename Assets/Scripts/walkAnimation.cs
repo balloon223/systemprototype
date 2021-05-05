@@ -25,4 +25,16 @@ public class walkAnimation : MonoBehaviour
             myAnim.SetBool("walk", false);
         }
     }
+
+    
+    private void OnTriggerEnter2D(Collider2D other){
+        if(other.CompareTag("slope")){
+            myAnim.SetBool("slide", true);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other){
+        if(other.CompareTag("slope")){
+            myAnim.SetBool("slide", false);
+        }
+    }
 }
