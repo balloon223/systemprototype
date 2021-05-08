@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer myRenderer;
     public static bool faceRight = true;
 
+    public Animator myAnim;
+
     AudioSource walkAudio;
 
     void Start()
@@ -175,6 +177,7 @@ public class PlayerController : MonoBehaviour
     {
         if(isGrounded == true && Input.GetKeyDown("up") || isGrounded == true && Input.GetKeyDown(KeyCode.W))
         {
+            myAnim.SetTrigger("takeOff");
             isGrounded = false;
             jumpRemaining = jumpLength;
             myBody.velocity += new Vector2(0, jumpPower);
@@ -189,6 +192,13 @@ public class PlayerController : MonoBehaviour
             {
                 jumpRemaining = 0;
             }
+        }
+        if (isGrounded == true){
+            myAnim.SetBool("jump", false);
+        }
+        else
+        {
+            myAnim.SetBool("jump", true);
         }
     }
 

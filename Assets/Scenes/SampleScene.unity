@@ -5800,6 +5800,7 @@ GameObject:
   - component: {fileID: 939280995}
   - component: {fileID: 939280996}
   - component: {fileID: 939280997}
+  - component: {fileID: 939280998}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -5834,6 +5835,7 @@ MonoBehaviour:
   mantleY: -0.22
   isGrounded: 0
   grabbing: 0
+  myAnim: {fileID: 939280992}
 --- !u!50 &939280987
 Rigidbody2D:
   serializedVersion: 4
@@ -5902,7 +5904,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939280985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.28, y: -6.6, z: 0}
+  m_LocalPosition: {x: 94.3, y: -16.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 519420032}
@@ -6120,6 +6122,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4327736, y: 0.8279295}
   m_EdgeRadius: 0
+--- !u!114 &939280998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939280985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400cadbd989fd4c10aed768b94549842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myAnim: {fileID: 939280992}
 --- !u!1 &950195152
 GameObject:
   m_ObjectHideFlags: 0
