@@ -130,6 +130,7 @@ public class PlayerPush : MonoBehaviour
         {
             grabbedObject.GetComponent<FixedJoint2D>().enabled = false;
             gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
+            grabbedObject = gameObject;
             control.grabbing = false;
         }
     }
