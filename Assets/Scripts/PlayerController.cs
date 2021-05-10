@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
 
     bool isWalking;
 
+    public bool drown;
+
     SpriteRenderer myRenderer;
     public static bool faceRight = true;
 
@@ -60,6 +62,8 @@ public class PlayerController : MonoBehaviour
         myCollider = GetComponent<Collider2D>();
         walkAudio = GetComponent<AudioSource>();
         whatIsGround = LayerMask.GetMask("Ground");
+
+        drown = false;
     }
 
     void FixedUpdate()
@@ -78,7 +82,13 @@ public class PlayerController : MonoBehaviour
             walkAudio.Stop();
         }
 
-        
+        if(drown == true){
+            myAnim.SetBool("drown", true);
+        }
+        else{
+            myAnim.SetBool("drown", false);
+        }
+     
         rotationJustifier();
 
         mantler();
@@ -210,8 +220,14 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D trig){
         if(trig.gameObject.tag == "Water"){
-            SceneManager.LoadScene(0);
+            drown = true;   
+            StartCoroutine(waitForDrowning());
         }
+    }
+    IEnumerator waitForDrowning(){
+        yield return new WaitForSeconds(3);        
+        SceneManager.LoadScene(0);
+        drown = false;
     }
 
     //void OnTriggerEnter2D(Collider2D trig){
