@@ -208,6 +208,12 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    void OnTriggerEnter2D(Collider2D trig){
+        if(trig.gameObject.tag == "Water"){
+            SceneManager.LoadScene(0);
+        }
+    }
+
     //void OnTriggerEnter2D(Collider2D trig){
     //    if(trig.gameObject.tag == "Trap"){
  //           StartCoroutine(waitForTrapDeath());
