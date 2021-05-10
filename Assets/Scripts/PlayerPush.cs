@@ -91,7 +91,7 @@ public class PlayerPush : MonoBehaviour
         if (hit.collider != null && hit.collider.gameObject.tag=="Pushable" && !grabbedObject.GetComponent<FixedJoint2D>().enabled)
         {
             dragging = hit.collider.gameObject;
-            Debug.Log("collide");
+            //Debug.Log("collide");
             if(Input.GetKey(KeyCode.E))    //placeholder we grab with e
             {
                 grabbedObject = dragging;

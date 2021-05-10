@@ -208,10 +208,16 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void OnTriggerEnter2D(Collider2D trig){
-        if(trig.gameObject.tag == "Trap"){
-            SceneManager.LoadScene(0);
-        }
-    }
+    //void OnTriggerEnter2D(Collider2D trig){
+    //    if(trig.gameObject.tag == "Trap"){
+ //           StartCoroutine(waitForTrapDeath());
+    //        //SceneManager.LoadScene(0);
+    //    }
+    //}
+
+   // IEnumerator waitForTrapDeath(){
+    //    yield return new WaitForSeconds(1);
+   //     SceneManager.LoadScene(0);
+ //   }
 
 }
