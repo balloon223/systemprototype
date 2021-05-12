@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
+  m_Name: New Material
   m_Shader: {fileID: 4800000, guid: a7791d9dd28f5644fb4c1208f43e2108, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -60,7 +60,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amplitude: 0.07
+    - _Amplitude: 0.05
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -72,17 +72,17 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OffsetScaleY: 3
+    - _OffsetScaleY: 1
     - _Parallax: 0.02
     - _PowerFresnel: 0.03
-    - _RippleSpeed: 0.5
+    - _RippleSpeed: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _VoronoiPower: 1.9
-    - _VoronoiScale: 13
-    - _XScaling: 1
+    - _VoronoiPower: 1.6
+    - _VoronoiScale: 6
+    - _XScaling: 2
     - _YOffset: 1
     - _ZWrite: 1
     - __dirty: 1
