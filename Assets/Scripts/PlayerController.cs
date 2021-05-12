@@ -69,7 +69,9 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         groundFinder();
-        leftRightMotionHandler();
+        if(!drown){
+            leftRightMotionHandler();
+        }
     }
 
     void Update()
@@ -169,7 +171,7 @@ public class PlayerController : MonoBehaviour
         Physics2D.queriesStartInColliders = false;
         Vector2 mantleOffset = new Vector2(transform.position.x + (mantleX * transform.localScale.x), transform.position.y + mantleY);  //this tells us what offset we use
         RaycastHit2D mantleDet = Physics2D.Raycast(mantleOffset, new Vector2(0, -1), mantleDetLength, whatIsGround);
-        if(mantleDet.collider != null && Input.GetKey(KeyCode.Space))
+        if(mantleDet.collider != null && Input.GetKey(KeyCode.W) || mantleDet.collider != null && Input.GetKey("up"))
         {
             mantling = true;
         } else{

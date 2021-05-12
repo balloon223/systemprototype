@@ -17,6 +17,7 @@ public class RopeSpawner : MonoBehaviour
 
     void Start()
     {
+        myBody = gameObject.GetComponent<Rigidbody2D>();
         generateRope();
     }
 
@@ -37,7 +38,7 @@ public class RopeSpawner : MonoBehaviour
         orig_length = ropeLength;
         float rootx = gameObject.transform.position.x;
         float rooty = gameObject.transform.position.y;
-        myBody = gameObject.GetComponent<Rigidbody2D>();
+
         prevRB = myBody;
         for(int ia = 1; ia <= ropeLength; ia++)
         {
@@ -45,6 +46,7 @@ public class RopeSpawner : MonoBehaviour
             newLink.transform.position = new Vector2(newLink.transform.position.x, newLink.transform.position.y - (0.25f + (ropeObject.transform.localScale.y*(ia-1))));
             newLink.GetComponent<HingeJoint2D>().connectedBody = prevRB;
             prevRB = newLink.GetComponent<Rigidbody2D>();
+            prevRB.velocity = new Vector2(Random.Range(-0.75f, 0.75f), 0);
         }
     }
 }
