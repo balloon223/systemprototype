@@ -15,9 +15,15 @@ public class TrapDeath : MonoBehaviour
     private TrapSelect trapSelector;
     private PlayerPush pushControl;
 
+    public AudioClip trapDeathTrigger;
+    AudioSource audio;
+    public bool havePlayedSound;
+
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
+
         moveIntoTrap = false;
         alreadyMovedBack = true;
 
@@ -26,6 +32,7 @@ public class TrapDeath : MonoBehaviour
         trapSelector = gameObject.GetComponent<TrapSelect>();
 
         pushControl = gameObject.GetComponent<PlayerPush>();
+            havePlayedSound = false;
     }
 
     // Update is called once per frame
@@ -48,6 +55,11 @@ public class TrapDeath : MonoBehaviour
             }
             else{
                 myAnim.SetBool("trapDead", true);   //dead
+            
+            if(havePlayedSound == false & trapDeathTrigger != null){
+            audio.PlayOneShot(trapDeathTrigger, 0.3f);
+            havePlayedSound=true;
+        }
                 
             }
         }

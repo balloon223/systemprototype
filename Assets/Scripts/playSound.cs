@@ -18,7 +18,7 @@ public class playSound : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if(triggerSound != null && other.gameObject.tag == "Player"){
-            audio.PlayOneShot(triggerSound, 1);
+            audio.PlayOneShot(triggerSound, 0.3f);
         }
 
     }
